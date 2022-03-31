@@ -2,6 +2,10 @@
   "name": "theaps",
   "version": "0.0.1",
   "description": "A simple Heap implementation in TypeScript",
+  "repository":{
+    "type":"git",
+    "url":"https://github.com/Tukajo/theaps"
+  },
   "files": [
     "dist/**/*"
   ],
