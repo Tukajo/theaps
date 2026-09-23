@@ -28,17 +28,14 @@ export class Heap<ElementType> implements HeapType<ElementType> {
     }
 
     peek(): ElementType {
-        return this.heap[0];
+        return this.heap[this.heap.length - 1];
     }
 
     pop = (): ElementType | undefined => {
         if (this.heap.length === 0) {
             return undefined;
         }
-        const item = this.heap[0];
-        this.heap.shift();
-        this.float(this.size());
-        return item;
+        return this.heap.pop();
     };
 
     push = (item: ElementType): number => {
@@ -64,7 +61,7 @@ export class Heap<ElementType> implements HeapType<ElementType> {
         if (parent < 0) {
             return 0;
         }
-        if (this.comparator(this.heap[pos], this.heap[parent]) < 0) {
+        if (this.comparator(this.heap[pos], this.heap[parent]) > 0) {
             this.swap(pos, parent);
             return this.float(parent);
         }
