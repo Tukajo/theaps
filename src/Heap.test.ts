@@ -104,3 +104,16 @@ test('Handles interleaved push and pop operations correctly', () => {
     expect(heap.pop()).toBe(5);
     expect(heap.pop()).toBeUndefined();
 });
+
+test('New helper methods isEmpty and clear', () => {
+    const heap = new Heap<number>();
+    expect(heap.size()).toBe(0);
+    expect(heap.isEmpty()).toBe(true);
+    heap.push(42);
+    expect(heap.size()).toBe(1);
+    expect(heap.isEmpty()).toBe(false);
+    heap.clear();
+    expect(heap.size()).toBe(0);
+    expect(heap.isEmpty()).toBe(true);
+    expect(heap.peek()).toBeUndefined();
+});

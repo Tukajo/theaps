@@ -8,8 +8,10 @@ export type HeapType<ElementType> = {
     peek: () => ElementType | undefined;
     pop: () => ElementType | undefined;
     push: (item: ElementType) => number;
-    replace: (item: ElementType) => number;
+    replace: (item: ElementType) => ElementType | undefined;
     size: () => number;
+    isEmpty: () => boolean;
+    clear: () => void;
     getHeap: () => ElementType[];
 };
 export type HeapComparator<ElementType> = (a: ElementType, b: ElementType) => number;
@@ -44,12 +46,20 @@ export class Heap<ElementType> implements HeapType<ElementType> {
     };
 
     // TODO - Implement replace
-    replace(_item: ElementType): number {
-        return 0;
+    replace(_item: ElementType): ElementType | undefined {
+        return undefined;
     }
 
     size(): number {
-        return this.heap.length - 1;
+        return this.heap.length;
+    }
+
+    isEmpty(): boolean {
+        return this.heap.length === 0;
+    }
+
+    clear(): void {
+        this.heap.length = 0;
     }
 
     getHeap(): ElementType[] {
