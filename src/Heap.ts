@@ -15,6 +15,7 @@ export type HeapType<ElementType> = {
     getHeap: () => ElementType[];
 };
 export type HeapComparator<ElementType> = (a: ElementType, b: ElementType) => number;
+
 export class Heap<ElementType> implements HeapType<ElementType> {
     private readonly comparator: (a: ElementType, b: ElementType) => number;
     private readonly heap: ElementType[];
@@ -29,25 +30,38 @@ export class Heap<ElementType> implements HeapType<ElementType> {
         }
     }
 
-    peek(): ElementType {
-        return this.heap[this.heap.length - 1];
+    peek(): ElementType | undefined {
+        return this.heap.length > 0 ? this.heap[0] : undefined;
     }
 
     pop = (): ElementType | undefined => {
         if (this.heap.length === 0) {
             return undefined;
         }
-        return this.heap.pop();
+        const top = this.heap[0];
+        const last = this.heap.pop()!;
+        if (this.heap.length > 0) {
+            this.heap[0] = last;
+            this.siftDown(0);
+        }
+        return top;
     };
 
     push = (item: ElementType): number => {
         this.heap.push(item);
-        return this.float(this.size());
+        this.siftUp(this.heap.length - 1);
+        return this.heap.length;
     };
 
-    // TODO - Implement replace
-    replace(_item: ElementType): ElementType | undefined {
-        return undefined;
+    replace(item: ElementType): ElementType | undefined {
+        if (this.heap.length === 0) {
+            this.push(item);
+            return undefined;
+        }
+        const top = this.heap[0];
+        this.heap[0] = item;
+        this.siftDown(0);
+        return top;
     }
 
     size(): number {
@@ -66,21 +80,46 @@ export class Heap<ElementType> implements HeapType<ElementType> {
         return this.heap;
     }
 
-    private float = (pos: number): number => {
-        const parent = Math.floor(pos - 1 / 2);
-        if (parent < 0) {
-            return 0;
+    private siftUp = (pos: number): void => {
+        let current = pos;
+        while (current > 0) {
+            const parent = Math.floor((current - 1) / 2);
+            if (this.comparator(this.heap[current], this.heap[parent]) < 0) {
+                this.swap(current, parent);
+                current = parent;
+            } else {
+                break;
+            }
         }
-        if (this.comparator(this.heap[pos], this.heap[parent]) > 0) {
-            this.swap(pos, parent);
-            return this.float(parent);
-        }
-        return pos;
     };
 
-    private swap(index: number, parentIndex: number): void {
+    private siftDown = (pos: number): void => {
+        let current = pos;
+        const length = this.heap.length;
+        while (current < length) {
+            let smallest = current;
+            const left = 2 * current + 1;
+            const right = 2 * current + 2;
+
+            if (left < length && this.comparator(this.heap[left], this.heap[smallest]) < 0) {
+                smallest = left;
+            }
+            if (right < length && this.comparator(this.heap[right], this.heap[smallest]) < 0) {
+                smallest = right;
+            }
+
+            if (smallest !== current) {
+                this.swap(current, smallest);
+                current = smallest;
+            } else {
+                break;
+            }
+        }
+    };
+
+    private swap(index: number, otherIndex: number): void {
         const temp = this.heap[index];
-        this.heap[index] = this.heap[parentIndex];
-        this.heap[parentIndex] = temp;
+        this.heap[index] = this.heap[otherIndex];
+        this.heap[otherIndex] = temp;
     }
 }
