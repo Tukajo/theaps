@@ -1,10 +1,10 @@
 {
   "name": "theaps",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A simple Heap implementation in TypeScript",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tukajo/theaps"
+    "url": "git+https://github.com/Tukajo/theaps.git"
   },
   "files": [
     "dist/**/*"
@@ -18,9 +18,7 @@
     "build:prod": "npm run clean && tsc --emitDeclarationOnly && webpack --mode=production",
     "devPack": "webpack --config webpack.config.js --mode=development",
     "lint": "eslint '*/**/*.{js,ts,tsx,jsx}' --quiet --fix",
-    "test": "jest",
-    "publishDry": "npm publish --dry-run",
-    "publish": "npm publish"
+    "test": "jest"
   },
   "jest": {
     "transform": {
