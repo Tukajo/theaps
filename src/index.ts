@@ -1,4 +1,10 @@
-import { Heap, HeapType, HeapComparator } from './Heap';
+import { Heap } from './Heap';
+import type { HeapType, HeapComparator } from './Heap';
 
-export { Heap, HeapType, HeapComparator };
+// Attach Heap and default onto Heap constructor for seamless CJS destructuring
+(Heap as unknown as Record<string, unknown>).Heap = Heap;
+(Heap as unknown as Record<string, unknown>).default = Heap;
+
+export { Heap };
+export type { HeapType, HeapComparator };
 export default Heap;

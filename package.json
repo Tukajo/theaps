@@ -14,8 +14,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc --emitDeclarationOnly && webpack --stats errors-warnings --mode=production",
-    "build:dev": "npm run clean && webpack --mode=development",
-    "build:prod": "npm run clean && webpack --mode=production",
+    "build:dev": "npm run clean && tsc --emitDeclarationOnly && webpack --mode=development",
+    "build:prod": "npm run clean && tsc --emitDeclarationOnly && webpack --mode=production",
     "devPack": "webpack --config webpack.config.js --mode=development",
     "lint": "eslint '*/**/*.{js,ts,tsx,jsx}' --quiet --fix",
     "test": "jest",
