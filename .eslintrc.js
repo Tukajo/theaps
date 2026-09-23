@@ -10,6 +10,8 @@ module.exports = {
         ecmaVersion: 12,
     },
     plugins: ['@typescript-eslint'],
-    rules: {},
+    rules: {
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
     ignorePatterns: ['.eslintrc.js', 'node_modules/', 'dist/', 'build/', 'webpack.config.js'],
 };

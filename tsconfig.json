@@ -12,7 +12,8 @@
         "noUnusedLocals": true,
         "module": "CommonJS",
         "target": "es2020",
-        "sourceMap": true
+        "sourceMap": true,
+        "ignoreDeprecations": "6.0"
     },
     "include": [
         "./src/**/*.ts",
