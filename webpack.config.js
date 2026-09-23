@@ -6,6 +6,13 @@ module.exports = {
     output: {
         filename: 'theaps.js',
         path: path.resolve(__dirname, 'dist'),
+        library: {
+            name: 'theaps',
+            type: 'umd',
+            export: 'default',
+            umdNamedDefine: true,
+        },
+        globalObject: 'this',
     },
     devtool: 'inline-source-map',
     module: {
@@ -21,6 +28,6 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js','.d.ts'],
+        extensions: ['.tsx', '.ts', '.js', '.d.ts'],
     },
 };
