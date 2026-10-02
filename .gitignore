@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output (tsc declarationDir + webpack path)
+dist/
+
+# Test output
+coverage/
+
+# Packed tarballs
+*.tgz
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
